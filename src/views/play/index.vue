@@ -1,0 +1,112 @@
+<template>
+  <div class="app-container">
+    <!--工具栏-->
+    <div class="head-container">
+      <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
+      <crudOperation :permission="permission" />
+      <!--表单组件-->
+      <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
+        <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
+          <el-form-item label="玩法名称" prop="name">
+            <el-input v-model="form.name" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="玩法简介">
+            <el-input :rows="3" v-model="form.title" type="textarea" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="赔率" prop="odds">
+            <el-input v-model="form.odds" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="投注限制" prop="orderMax">
+            <el-input v-model="form.orderMax" style="width: 370px;" />
+          </el-form-item>
+          <el-form-item label="状态" prop="stat">
+                未设置字典，请手动设置 Radio
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="text" @click="crud.cancelCU">取消</el-button>
+          <el-button :loading="crud.cu === 2" type="primary" @click="crud.submitCU">确认</el-button>
+        </div>
+      </el-dialog>
+      <!--表格渲染-->
+      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+        <el-table-column type="selection" width="55" />
+        <el-table-column v-if="columns.visible('name')" prop="name" label="玩法名称" />
+        <el-table-column v-if="columns.visible('title')" prop="title" label="玩法简介" />
+        <el-table-column v-if="columns.visible('odds')" prop="odds" label="赔率" />
+        <el-table-column v-if="columns.visible('orderMax')" prop="orderMax" label="投注限制" />
+        <el-table-column v-if="columns.visible('stat')" prop="stat" label="状态" />
+        <el-table-column v-if="columns.visible('createTime')" prop="createTime" label="创建时间">
+          <template slot-scope="scope">
+            <span>{{ parseTime(scope.row.createTime) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-if="columns.visible('updateTime')" prop="updateTime" label="更新时间">
+          <template slot-scope="scope">
+            <span>{{ parseTime(scope.row.updateTime) }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column v-permission="['admin','play:edit','play:del']" label="操作" width="150px" align="center">
+          <template slot-scope="scope">
+            <udOperation
+              :data="scope.row"
+              :permission="permission"
+            />
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--分页组件-->
+      <pagination />
+    </div>
+  </div>
+</template>
+
+<script>
+import crudPlay from '@/api/play'
+import CRUD, { presenter, header, form, crud } from '@crud/crud'
+import rrOperation from '@crud/RR.operation'
+import crudOperation from '@crud/CRUD.operation'
+import udOperation from '@crud/UD.operation'
+import pagination from '@crud/Pagination'
+
+// crud交由presenter持有
+const defaultCrud = CRUD({ title: '玩法设置', url: 'api/play', sort: 'id,desc', crudMethod: { ...crudPlay }})
+const defaultForm = { id: null, name: null, title: null, odds: null, orderMax: null, stat: null, createTime: null, updateTime: null }
+export default {
+  name: 'Play',
+  components: { pagination, crudOperation, rrOperation, udOperation },
+  mixins: [presenter(defaultCrud), header(), form(defaultForm), crud()],
+  data() {
+    return {
+      permission: {
+        add: ['admin', 'play:add'],
+        edit: ['admin', 'play:edit'],
+        del: ['admin', 'play:del']
+      },
+      rules: {
+        name: [
+          { required: true, message: '玩法名称不能为空', trigger: 'blur' }
+        ],
+        odds: [
+          { required: true, message: '赔率不能为空', trigger: 'blur' }
+        ],
+        orderMax: [
+          { required: true, message: '投注限制不能为空', trigger: 'blur' }
+        ],
+        stat: [
+          { required: true, message: '状态不能为空', trigger: 'blur' }
+        ]
+      }    }
+  },
+  methods: {
+    // 获取数据前设置好接口地址
+    [CRUD.HOOK.beforeRefresh]() {
+      return true
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
