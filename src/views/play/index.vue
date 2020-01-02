@@ -11,7 +11,7 @@
             <el-input v-model="form.name" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="玩法简介">
-            <el-input :rows="3" v-model="form.title" type="textarea" style="width: 370px;" />
+            <el-input v-model="form.title" :rows="3" type="textarea" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="赔率" prop="odds">
             <el-input v-model="form.odds" style="width: 370px;" />
@@ -20,7 +20,7 @@
             <el-input v-model="form.orderMax" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="状态" prop="stat">
-                未设置字典，请手动设置 Radio
+            未设置字典，请手动设置 Radio
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -96,7 +96,7 @@ export default {
         stat: [
           { required: true, message: '状态不能为空', trigger: 'blur' }
         ]
-      }    }
+      }}
   },
   methods: {
     // 获取数据前设置好接口地址

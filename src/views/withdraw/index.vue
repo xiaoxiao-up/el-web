@@ -124,7 +124,7 @@ export default {
         stat: [
           { required: true, message: '状态不能为空', trigger: 'blur' }
         ]
-      }    }
+      }}
   },
   methods: {
     // 获取数据前设置好接口地址
