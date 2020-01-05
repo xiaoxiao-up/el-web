@@ -16,8 +16,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="openTimeStart"
-          end-placeholder="openTimeEnd"
+          start-placeholder="开奖时间"
+          end-placeholder="开奖时间"
         />
         <el-date-picker
           v-model="query.createTime"
@@ -27,8 +27,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="createTimeStart"
-          end-placeholder="createTimeEnd"
+          start-placeholder="创建时间"
+          end-placeholder="创建时间"
         />
         <el-date-picker
           v-model="query.updateTime"
@@ -38,8 +38,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="updateTimeStart"
-          end-placeholder="updateTimeEnd"
+          start-placeholder="更新时间"
+          end-placeholder="更新时间"
         />
         <rrOperation :crud="crud" />
       </div>
@@ -72,7 +72,7 @@
           <el-form-item label="中奖金额" prop="winAmount">
             <el-input v-model="form.winAmount" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="状态0-不开启，1-开启" prop="stat">
+          <el-form-item label="状态" prop="stat">
             <el-input v-model="form.stat" style="width: 370px;" />
           </el-form-item>
         </el-form>
@@ -96,7 +96,7 @@
         <el-table-column v-if="columns.visible('number')" prop="number" label="注数" />
         <el-table-column v-if="columns.visible('amount')" prop="amount" label="投注金额" />
         <el-table-column v-if="columns.visible('winAmount')" prop="winAmount" label="中奖金额" />
-        <el-table-column v-if="columns.visible('stat')" prop="stat" label="状态0-不开启，1-开启" />
+        <el-table-column v-if="columns.visible('stat')" prop="stat" label="状态" />
         <el-table-column v-if="columns.visible('createTime')" prop="createTime" label="创建时间">
           <template slot-scope="scope">
             <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -170,7 +170,7 @@ export default {
           { required: true, message: '中奖金额不能为空', trigger: 'blur' }
         ],
         stat: [
-          { required: true, message: '状态0-不开启，1-开启不能为空', trigger: 'blur' }
+          { required: true, message: '状态', trigger: 'blur' }
         ]
       },
       queryTypeOptions: [

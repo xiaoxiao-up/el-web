@@ -10,7 +10,7 @@
           <el-form-item label="单号" prop="orderId">
             <el-input v-model="form.orderId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="用户id">
+          <el-form-item label="用户名称">
             <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="充值金额" prop="rechargePrice">
@@ -19,11 +19,15 @@
           <el-form-item label="实际到账" prop="actualPrice">
             <el-input v-model="form.actualPrice" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="充值前金额" prop="preRecharge">
+          <el-form-item label="以前金额" prop="preRecharge">
             <el-input v-model="form.preRecharge" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="充值方式" prop="type">
-            未设置字典，请手动设置 Select
+            <el-radio-group v-model="form.type" style="width: 250px">
+              <el-radio label="微信">微信</el-radio>
+              <el-radio label="支付宝">支付宝</el-radio>
+              <el-radio label="转账">转账</el-radio>
+            </el-radio-group>
           </el-form-item>
           <el-form-item label="备注">
             <el-input v-model="form.bak" style="width: 370px;" />
@@ -41,7 +45,7 @@
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('orderId')" prop="orderId" label="单号" />
-        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户id" />
+        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户名称" />
         <el-table-column v-if="columns.visible('rechargePrice')" prop="rechargePrice" label="充值金额" />
         <el-table-column v-if="columns.visible('actualPrice')" prop="actualPrice" label="实际到账" />
         <el-table-column v-if="columns.visible('preRecharge')" prop="preRecharge" label="充值前金额" />

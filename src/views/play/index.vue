@@ -20,7 +20,10 @@
             <el-input v-model="form.orderMax" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="状态" prop="stat">
-            未设置字典，请手动设置 Radio
+            <el-radio-group v-model="form.stat" style="width: 178px">
+              <el-radio label="启用">启用</el-radio>
+              <el-radio label="禁用">禁用</el-radio>
+            </el-radio-group>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">

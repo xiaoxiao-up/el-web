@@ -16,8 +16,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="createTimeStart"
-          end-placeholder="createTimeEnd"
+          start-placeholder="创建时间"
+          end-placeholder="创建时间"
         />
         <el-date-picker
           v-model="query.updateTime"
@@ -27,8 +27,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="updateTimeStart"
-          end-placeholder="updateTimeEnd"
+          start-placeholder="更新时间"
+          end-placeholder="更新时间"
         />
         <rrOperation :crud="crud" />
       </div>

@@ -16,8 +16,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="openTimeStart"
-          end-placeholder="openTimeEnd"
+          start-placeholder="开奖时间"
+          end-placeholder="开奖时候"
         />
         <el-date-picker
           v-model="query.startTime"
@@ -27,8 +27,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="startTimeStart"
-          end-placeholder="startTimeEnd"
+          start-placeholder="开始时间"
+          end-placeholder="开始时间"
         />
         <el-date-picker
           v-model="query.endTime"
@@ -38,8 +38,8 @@
           size="small"
           class="date-item"
           value-format="yyyy-MM-dd HH:mm:ss"
-          start-placeholder="endTimeStart"
-          end-placeholder="endTimeEnd"
+          start-placeholder="结束时间"
+          end-placeholder="结束时间"
         />
         <rrOperation :crud="crud" />
       </div>

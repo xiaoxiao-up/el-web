@@ -10,7 +10,7 @@
           <el-form-item label="单号" prop="orderId">
             <el-input v-model="form.orderId" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="用户id">
+          <el-form-item label="用户名称">
             <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="手续费" prop="fee">
@@ -44,7 +44,7 @@
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('orderId')" prop="orderId" label="单号" />
-        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户id" />
+        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户名称" />
         <el-table-column v-if="columns.visible('fee')" prop="fee" label="手续费" />
         <el-table-column v-if="columns.visible('withdrawPrice')" prop="withdrawPrice" label="提现金额" />
         <el-table-column v-if="columns.visible('bank')" prop="bank" label="开户银行" />

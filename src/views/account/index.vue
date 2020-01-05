@@ -10,7 +10,7 @@
           <el-form-item label="类型" prop="type">
             <el-input v-model="form.type" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="用户id">
+          <el-form-item label="用户名称">
             <el-input v-model="form.userId" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="账变金额" prop="change">
@@ -25,12 +25,6 @@
           <el-form-item label="状态" prop="stat">
             <el-input v-model="form.stat" style="width: 370px;" />
           </el-form-item>
-          <el-form-item label="创建时间">
-            <el-input v-model="form.createTime" style="width: 370px;" />
-          </el-form-item>
-          <el-form-item label="更新时间">
-            <el-input v-model="form.updateTime" style="width: 370px;" />
-          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button type="text" @click="crud.cancelCU">取消</el-button>
@@ -41,7 +35,7 @@
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <el-table-column v-if="columns.visible('type')" prop="type" label="类型" />
-        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户id" />
+        <el-table-column v-if="columns.visible('userId')" prop="userId" label="用户名称" />
         <el-table-column v-if="columns.visible('change')" prop="change" label="账变金额" />
         <el-table-column v-if="columns.visible('balance')" prop="balance" label="余额" />
         <el-table-column v-if="columns.visible('remark')" prop="remark" label="备注" />
